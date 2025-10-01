@@ -1,42 +1,10 @@
-// import React from 'react'
-// import StudentPanel from './StudentPanel.jsx'
-// import TeacherPanel from './TeacherPanel.jsx'
-// import RoleSelect from './RoleSelect.jsx'
-
-// const App = () => {
-//   const [role, setRole] = React.useState(sessionStorage.getItem('livepoll_role') || '')
-//   function selectRole(next) {
-//     setRole(next)
-//     sessionStorage.setItem('livepoll_role', next)
-//   }
-//   function continueFromLanding() {
-//     // explicit continue to match Figma
-//   }
-//   return (
-//     <div className="container">
-//       {!role ? (
-//         <RoleSelect role={role} onSelect={selectRole} onContinue={continueFromLanding} />
-//       ) : (
-//         <>
-//           <header className="topbar">
-//             <h1>Live Polling</h1>
-//             <div className="role-switch">
-//               <button onClick={() => selectRole('teacher')} disabled={role === 'teacher'}>Teacher</button>
-//               <button onClick={() => selectRole('student')} disabled={role === 'student'}>Student</button>
-//             </div>
-//           </header>
-//           {role === 'teacher' ? <TeacherPanel /> : <StudentPanel />}
-//         </>
-//       )}
-//     </div>
-//   )
-// }
-
-// export default App
 import React from 'react'
 import StudentPanel from './StudentPanel.jsx'
 import TeacherPanel from './TeacherPanel.jsx'
 import RoleSelect from './RoleSelect.jsx'
+
+// Get backend URL from environment variable
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4970'
 
 const App = () => {
   const [role, setRole] = React.useState('')
@@ -80,7 +48,7 @@ const App = () => {
               </header>
             )
           })()}
-          {role === 'teacher' ? <TeacherPanel /> : <StudentPanel />}
+          {role === 'teacher' ? <TeacherPanel apiUrl={API_URL} /> : <StudentPanel apiUrl={API_URL} />}
         </>
       )}
       <button className="theme-toggle" onClick={() => setTheme(t => t === 'light' ? 'dark' : 'light')} aria-label="Toggle theme">
