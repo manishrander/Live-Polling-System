@@ -6,10 +6,44 @@ import { connectDB, ChatMessage, Participant } from './db.js'
 
 const app = express()
 app.use(express.json())
-// Enable CORS for the Vite dev server and any other origins during development
-app.use(cors({ origin: ['http://localhost:5173', 'http://127.0.0.1:5173', '*'], methods: ['GET','POST'], credentials: false }))
+
+// CORS configuration for development and production
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  process.env.FRONTEND_URL || '*'
+]
+
+app.use(cors({ 
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true)
+    
+    // Allow if origin is in allowedOrigins or if wildcard is set
+    if (allowedOrigins.includes('*') || allowedOrigins.includes(origin)) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
+  methods: ['GET', 'POST'],
+  credentials: false
+}))
+
 const server = http.createServer(app)
-const io = new Server(server, { cors: { origin: '*', methods: ['GET','POST'] } })
+const io = new Server(server, { 
+  cors: { 
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true)
+      if (allowedOrigins.includes('*') || allowedOrigins.includes(origin)) {
+        callback(null, true)
+      } else {
+        callback(null, false)
+      }
+    },
+    methods: ['GET', 'POST']
+  }
+})
 
 const PORT = process.env.PORT || 4970
 

@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: livepolling-backend
+    runtime: node
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        sync: false
+      - key: MONGODB_URI
+        sync: false
+    healthCheckPath: /
