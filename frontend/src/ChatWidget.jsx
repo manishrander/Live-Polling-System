@@ -14,7 +14,8 @@ const ChatWidget = ({ currentUserName = 'You', canKick = false }) => {
 
   useEffect(() => {
     if (!socketRef.current) {
-      const url = (import.meta.env.VITE_SOCKET_URL || 'http://localhost:4970')
+      // const url = (import.meta.env.VITE_SOCKET_URL || 'http://localhost:4970')
+      const url=`https://live-polling-system-3s4i.onrender.com`
       socketRef.current = io(url, {
         transports: ['websocket', 'polling'],
         withCredentials: false,
