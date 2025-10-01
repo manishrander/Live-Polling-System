@@ -122,7 +122,7 @@ const TeacherPanel = () => {
       {showHistory && (
         <div className="history-overlay">
           <div className="history-container">
-            <h2 style={{ fontSize: 36, marginBottom: 24, textAlign: 'center' }}>View <span style={{ fontWeight: 800 }}>Poll History</span></h2>
+            <h2 style={{ fontSize: 'clamp(24px, 5vw, 36px)', marginBottom: 24, textAlign: 'center' }}>View <span style={{ fontWeight: 800 }}>Poll History</span></h2>
             {history.length === 0 && <p style={{ textAlign: 'center' }}>No history yet.</p>}
             {history.map((h, i) => (
               <div key={h.id} className="question-card" style={{ marginBottom: 24 }}>

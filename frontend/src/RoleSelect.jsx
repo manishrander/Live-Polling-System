@@ -44,9 +44,6 @@ const RoleSelect = ({ role, onSelect, onContinue }) => {
       </div>
       <button className="cta" onClick={onContinue} disabled={!role} style={{
         marginTop: 24,
-        fontSize: "1.16rem",
-        width: 240,
-        borderRadius: 28,
       }}>Continue</button>
     </div>
   )
