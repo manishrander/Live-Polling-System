@@ -14,7 +14,7 @@ const ChatWidget = ({ currentUserName = 'You', canKick = false }) => {
 
   useEffect(() => {
     if (!socketRef.current) {
-      const url = (import.meta.env.VITE_SOCKET_URL || 'http://localhost:4960')
+      const url = (import.meta.env.VITE_SOCKET_URL || 'http://localhost:4970')
       socketRef.current = io(url, {
         transports: ['websocket', 'polling'],
         withCredentials: false,

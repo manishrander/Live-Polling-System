@@ -1,11 +1,16 @@
 import mongoose from 'mongoose'
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/livepolling'
+// MongoDB Atlas connection string
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://manishrander68_db_user:Manish@cluster0.iliofxl.mongodb.net/livepolling?retryWrites=true&w=majority'
+
+// Localhost fallback (commented out - using MongoDB Atlas)
+// const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/livepolling'
 
 export async function connectDB() {
   try {
     await mongoose.connect(MONGODB_URI)
-    console.log('✅ MongoDB connected successfully')
+    console.log('✅ MongoDB Atlas connected successfully')
+    console.log('📊 Database: livepolling')
   } catch (error) {
     console.error('❌ MongoDB connection error:', error.message)
     console.log('⚠️  Running without database - data will not persist')
