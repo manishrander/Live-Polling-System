@@ -11,7 +11,7 @@ app.use(express.json())
 const allowedOrigins = [
   'http://localhost:5173',
   'http://127.0.0.1:5173',
-  process.env.FRONTEND_URL || '*'
+  process.env.FRONTEND_URL || 'https://live-polling-system1-19d4.vercel.app/'
 ]
 
 app.use(cors({ 
@@ -45,7 +45,7 @@ const io = new Server(server, {
   }
 })
 
-const PORT = process.env.PORT || 4970
+const PORT = process.env.PORT || 4975
 
 // Connect to MongoDB
 connectDB()
